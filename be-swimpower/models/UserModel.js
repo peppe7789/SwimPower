@@ -4,10 +4,9 @@ const mongoose = require("mongoose")
 const avatarBoy = "./assets/avatar-boy.png"
 const avatarGirl = "./assets/avatar-girl.png"
 const allowedGenders = ["M","F"]
-const avatarImage = gender === "M" ? avatarBoy : avatarGirl
 const allowedRole = ["admin", "payuser", "freeuser"]
 
-const UserSchema = new mongoose, Schema({
+const UserSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true,
@@ -46,7 +45,7 @@ const UserSchema = new mongoose, Schema({
     avatar: {
         type: String,
         required: false,
-        default: avatarImage
+        default: "./assets/avatar-boy.png"
     },
     dob: {
         type: Date,
@@ -54,4 +53,9 @@ const UserSchema = new mongoose, Schema({
         default: Date.now
     }
 
+}, {
+    timestamp: true,
+    strict:true
 })
+
+module.exports = mongoose.model("usermodel", UserSchema, "users")

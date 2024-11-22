@@ -6,13 +6,13 @@ const path = require("path")
 
 
 // dichiarazione route
-
+const userRoute = require("./routes/user")
 
 
 
 // dichiarazione middleware
 const cors = require("cors")
-
+const validateUserBody = require("./middleware/validateUserBody")
 
 
 
@@ -26,11 +26,13 @@ server.use(express.json())
 
 // utilizzo middleware
 server.use(cors())
+server.use(validateUserBody)
+
 
 
 
 // utilizzo route
-
+server.use("/", userRoute)
 
 
 
