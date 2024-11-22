@@ -51,11 +51,17 @@ const UserSchema = new mongoose.Schema({
         type: Date,
         required: false,
         default: Date.now
-    }
+    },
+    checkIn: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "checkInModel"
+        }
+    ]
 
 }, {
     timestamp: true,
     strict:true
 })
 
-module.exports = mongoose.model("usermodel", UserSchema, "users")
+module.exports = mongoose.model("userModel", UserSchema, "users")

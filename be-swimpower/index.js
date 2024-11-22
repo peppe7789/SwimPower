@@ -7,7 +7,7 @@ const path = require("path")
 
 // dichiarazione route
 const userRoute = require("./routes/user")
-
+const checkInRoute = require("./routes/checkIn")
 
 
 // dichiarazione middleware
@@ -33,6 +33,7 @@ server.use(validateUserBody)
 
 // utilizzo route
 server.use("/", userRoute)
+server.use("/", checkInRoute)
 
 
 
