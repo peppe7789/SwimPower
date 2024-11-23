@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const allowedGenders = ["M","F"]
-const allowedRole = ["admin", "payuser", "freeuser"]
+const allowedRole = ["admin","instructor", "payuser", "freeuser"]
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -58,6 +58,14 @@ const UserSchema = new mongoose.Schema({
     subscription: {
         type: mongoose.Schema.Types.ObjectId,
         ref:"subscriptionModel"
+    },
+    postEvent: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"postEventModel"
+    },
+    ticketService: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ticketServiceModel"
     }
 
 }, {

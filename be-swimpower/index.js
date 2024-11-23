@@ -10,6 +10,7 @@ const userRoute = require("./routes/user")
 const checkInRoute = require("./routes/checkIn")
 const subscriptionRoute = require("./routes/subscription")
 const postEventRoute = require("./routes/postEvent")
+const ticketServiceRoute = require("./routes/ticketService")
 
 
 // dichiarazione middleware
@@ -38,6 +39,7 @@ server.use("/", userRoute)
 server.use("/", checkInRoute)
 server.use("/", subscriptionRoute)
 server.use("/", postEventRoute)
+server.use("/", ticketServiceRoute)
 
 
 
