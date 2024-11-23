@@ -1,8 +1,5 @@
 const mongoose = require("mongoose")
 
-
-const avatarBoy = "./assets/avatar-boy.png"
-const avatarGirl = "./assets/avatar-girl.png"
 const allowedGenders = ["M","F"]
 const allowedRole = ["admin", "payuser", "freeuser"]
 
@@ -57,11 +54,15 @@ const UserSchema = new mongoose.Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: "checkInModel"
         }
-    ]
+    ],
+    subscription: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref:"subscriptionModel"
+    }
 
 }, {
     timestamp: true,
     strict:true
 })
 
-module.exports = mongoose.model("userModel", UserSchema, "users")
+module.exports = mongoose.model("userModel", UserSchema, "user")
