@@ -9,6 +9,8 @@ const path = require("path")
 const userRoute = require("./routes/user")
 const checkInRoute = require("./routes/checkIn")
 const subscriptionRoute = require("./routes/subscription")
+const postEventRoute = require("./routes/postEvent")
+
 
 // dichiarazione middleware
 const cors = require("cors")
@@ -35,7 +37,7 @@ server.use(validateUserBody)
 server.use("/", userRoute)
 server.use("/", checkInRoute)
 server.use("/", subscriptionRoute)
-
+server.use("/", postEventRoute)
 
 
 
