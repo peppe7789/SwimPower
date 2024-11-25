@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const allowedGenders = ["M","F"]
+const allowedGenders = ["M","F","not specified"]
 const allowedRole = ["admin","instructor", "payuser", "freeuser"]
 
 const UserSchema = new mongoose.Schema({
@@ -35,8 +35,8 @@ const UserSchema = new mongoose.Schema({
     },
     gender: {
         type: String,
-        enum: allowedGenders,
         required: false,
+        enum: allowedGenders,
         default: "not specified"
     },
     avatar: {

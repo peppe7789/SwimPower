@@ -25,26 +25,11 @@ const ValidateUserBody = [
             minLowercase: 1,
             minUppercase: 1,
             minNumbers: 1,
-            minNumbers: 1,
+            minSymbols: 1
         })
         .notEmpty()
         .withMessage("Password is not vallid, must be 8 characters long, at least one character uppercase, one character lowercase, one number and one special character "),
     
-    body("role")
-        .isString()
-        .withMessage("Role is not valid, must be a string"),
-    
-    body("gender")
-        .isString()
-        .withMessage("Gender is not valid, must be a string"),
-    
-    body("avatar")
-        .isString()
-        .withMessage("Image is not valid, must be a string"),
-    
-    body("dob")
-        .isDate()
-        .withMessage("Dob is not vali, must be a data"),
     
     (req, res, next) => {
         const errors = validationResult(req)

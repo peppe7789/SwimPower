@@ -15,7 +15,6 @@ const ticketServiceRoute = require("./routes/ticketService")
 
 // dichiarazione middleware
 const cors = require("cors")
-const validateUserBody = require("./middleware/validateUserBody")
 
 
 
@@ -29,7 +28,7 @@ server.use(express.json())
 
 // utilizzo middleware
 server.use(cors())
-server.use(validateUserBody)
+
 
 
 
@@ -49,4 +48,3 @@ init()
 
 
 server.listen(PORT, () => console.log(`Server is running on PORT ${PORT}`))
-
