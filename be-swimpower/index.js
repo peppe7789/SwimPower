@@ -15,8 +15,9 @@ const ticketServiceRoute = require("./routes/ticketService")
 
 // dichiarazione middleware
 const cors = require("cors")
-
-
+const genericErrorHandler = require("./middleware/genericErrorHandler")
+const badReqHandler = require("./middleware/badReqHandler")
+const notFound = require("./middleware/notFound")
 
 const PORT = 4047
 const server = express()
@@ -40,9 +41,10 @@ server.use("/", subscriptionRoute)
 server.use("/", postEventRoute)
 server.use("/", ticketServiceRoute)
 
-
-
-
+//generic error handler
+server.use(notFound)
+server.use(genericErrorHandler)
+server.use(badReqHandler)
 init()
 
 

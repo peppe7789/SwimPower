@@ -1,9 +1,10 @@
 const mongoose = require("mongoose")
-const ticketService = require("../routes/ticketService")
 
 const allowedLesson = ["personal-pro", "personal-middle", "personal-base"]
 const allowedInstructor = ["Andrea", "Ettore", "Manuel"]
-const TicketServiceModel = new mongoose.Schema(
+
+
+const TicketServiceSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -22,7 +23,7 @@ const TicketServiceModel = new mongoose.Schema(
             default: "not specificated"
         },
         dateLesson: {
-            type: Date,
+            type: Date, 
             required: true,
         }
     }, {
@@ -31,4 +32,4 @@ const TicketServiceModel = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model("ticketServiceModel", TicketServiceModel, "ticketService")
+module.exports = mongoose.model("ticketServiceModel", TicketServiceSchema, "ticketService")

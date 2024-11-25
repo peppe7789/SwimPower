@@ -5,6 +5,7 @@ const multer = require("multer")
 const cloudStorage = require("../middleware/updateUserImageCloudinaryMiddleware")
 const cloud = multer({ storage: cloudStorage })
 const bcrypt = require("bcrypt")
+const ticketServiceModel= require("../models/TicketServiceModel")
 
 const ValidateUserBody = require('../middleware/validateUserBody')
 
@@ -66,6 +67,7 @@ user.get("/user/userId/:userId", async (req, res, next) => {
     try {
         const user = await UserModel
             .findById(userId)
+            .populate("ticketService")
 
         if (user.length === 0) {
             return res

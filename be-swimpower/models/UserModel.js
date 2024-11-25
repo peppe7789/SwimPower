@@ -59,14 +59,18 @@ const UserSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref:"subscriptionModel"
     },
-    postEvent: {
+    postEvent: [
+        {
         type: mongoose.Schema.Types.ObjectId,
         ref:"postEventModel"
-    },
-    ticketService: {
+        }
+    ],
+    ticketService: [
+        {
         type: mongoose.Schema.Types.ObjectId,
         ref: "ticketServiceModel"
-    }
+        }
+    ]
 
 }, {
     timestamp: true,
