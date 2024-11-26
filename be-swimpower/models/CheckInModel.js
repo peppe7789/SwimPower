@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const CheckInModel = new mongoose.Schema(
+const CheckInSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -9,7 +9,7 @@ const CheckInModel = new mongoose.Schema(
         checkIn: {
             type: Date,
             required: true,
-            default: Date.now
+            default: new Date()
         }
     }, {
         timestamps: true,
@@ -17,4 +17,4 @@ const CheckInModel = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model("checkInModel", CheckInModel, "checkIn")
+module.exports = mongoose.model("checkInModel", CheckInSchema, "checkIn")
