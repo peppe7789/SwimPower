@@ -144,4 +144,33 @@ ticketService.patch("/ticketService/patch/:ticketServiceId", async (req, res, ne
 })
 
 
+ticketService.get("/ticketService/ticketServiceId/:ticketServiceId", async (req, res, next) => {
+    const { ticketServiceId } = req.params
+    
+    try {
+        const ticketService = await TicketServiceModel
+            .findById(ticketServiceId)
+        
+        if (ticketService.length === 0) {
+            return res
+                .status(404)
+                .send({
+                    statusCode: 404,
+                    message: "Ticket not found"
+                })
+        }
+
+        res
+            .status(200)
+            .send({
+                statusCode: 200,
+                message: "Ticket found with successfully",
+                ticketService
+        })
+    } catch (e) {
+        next(e)
+    }
+})
+
+
 module.exports = ticketService
