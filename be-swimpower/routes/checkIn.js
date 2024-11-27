@@ -9,7 +9,6 @@ checkIn.get("/checkIn", async (req, res, next) => {
     try {
         const checkIn = await CheckInModel
             .find()
-
         if (checkIn.length === 0) {
             return res
                 .status(404)
@@ -65,7 +64,8 @@ checkIn.post("/checkIn/create", async (req, res, next) => {
             .status(201)
             .send({
                 statusCode: 201,
-                message:"CheckIn created with successfully"
+                message: "CheckIn created with successfully",
+                savedChekIn
         })
     } catch (e) {
         next(e)

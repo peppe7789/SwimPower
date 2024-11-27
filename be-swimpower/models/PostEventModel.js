@@ -1,6 +1,6 @@
 const mongoose = require("mongoose")
 
-const PostEventModel = new mongoose.Schema(
+const PostEventSchema = new mongoose.Schema(
     {
         user: {
             type: mongoose.Schema.Types.ObjectId,
@@ -32,4 +32,4 @@ const PostEventModel = new mongoose.Schema(
     }
 )
 
-module.exports = mongoose.model("postEventModel", PostEventModel, "postEvent")
+module.exports = mongoose.model("postEventModel", PostEventSchema, "postEvent")

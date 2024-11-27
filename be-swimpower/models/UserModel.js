@@ -49,16 +49,20 @@ const UserSchema = new mongoose.Schema({
         required: false,
         default: Date.now
     },
+    startSubscription: {
+        type: Date,
+        required: false
+    },
+    endSubscription: {
+        type: Date,
+        required: false
+    },
     checkIn: [
         {
             type: mongoose.Schema.Types.ObjectId,
             ref: "checkInModel"
         }
     ],
-    subscription: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref:"subscriptionModel"
-    },
     postEvent: [
         {
         type: mongoose.Schema.Types.ObjectId,
