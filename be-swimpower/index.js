@@ -8,7 +8,6 @@ const path = require("path")
 // dichiarazione route
 const userRoute = require("./routes/user")
 const checkInRoute = require("./routes/checkIn")
-const subscriptionRoute = require("./routes/subscription")
 const postEventRoute = require("./routes/postEvent")
 const ticketServiceRoute = require("./routes/ticketService")
 
@@ -37,7 +36,6 @@ server.use(cors())
 // utilizzo route
 server.use("/", userRoute)
 server.use("/", checkInRoute)
-server.use("/", subscriptionRoute)
 server.use("/", postEventRoute)
 server.use("/", ticketServiceRoute)
 
