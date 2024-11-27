@@ -3,7 +3,7 @@ const express = require("express")
 const ticketService = express.Router()
 const TicketServiceModel = require("../models/TicketServiceModel")
 const UserModel = require("../models/UserModel")
-
+const ValidateTicketService = require("../middleware/validateTicketService")
 ticketService.get("/ticketService", async (req, res, next) => {
 
     try {
@@ -31,7 +31,7 @@ ticketService.get("/ticketService", async (req, res, next) => {
 })
 
 
-ticketService.post("/ticketService/create", async (req, res, next) => {
+ticketService.post("/ticketService/create",[ValidateTicketService], async (req, res, next) => {
 
     const { typeLesson, instructor, dateLesson } = req.body
 

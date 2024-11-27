@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 const allowedLesson = ["personal-pro", "personal-middle", "personal-base"]
-const allowedInstructor = ["Andrea", "Ettore", "Manuel"]
+const allowedInstructor = ["andrea", "ettore", "manuel"]
 
 
 const TicketServiceSchema = new mongoose.Schema(

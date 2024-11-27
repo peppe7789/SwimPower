@@ -29,24 +29,24 @@ const UserSchema = new mongoose.Schema({
     },
     role: {
         type: String,
-        required: false,
+        required: true,
         default: "freeuser",
         enum: allowedRole
     },
     gender: {
         type: String,
-        required: false,
+        required: true,
         enum: allowedGenders,
         default: "not specified"
     },
     avatar: {
         type: String,
-        required: false,
+        required: true,
         default: "./assets/avatar-boy.png"
     },
     dob: {
         type: Date,
-        required: false,
+        required: true,
         default: Date.now
     },
     startSubscription: {
