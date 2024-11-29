@@ -4,6 +4,8 @@ const ticketService = express.Router()
 const TicketServiceModel = require("../models/TicketServiceModel")
 const UserModel = require("../models/UserModel")
 const ValidateTicketService = require("../middleware/validateTicketService")
+
+
 ticketService.get("/ticketService", async (req, res, next) => {
 
     try {
@@ -11,8 +13,8 @@ ticketService.get("/ticketService", async (req, res, next) => {
             .find()
         if (ticketService.length === 0) {
             return res
-                .status(400),
-                send({
+                .status(400)
+                .send({
                     statusCode: 400,
                     message: "Ticket not found"
                 })
@@ -117,7 +119,7 @@ ticketService.patch("/ticketService/patch/:ticketServiceId", async (req, res, ne
     const ticketService = await TicketServiceModel
         .findById(ticketServiceId)
 
-    if (!ticketServiceId) {
+    if (!ticketService) {
         return res
             .status(400)
             .send({
