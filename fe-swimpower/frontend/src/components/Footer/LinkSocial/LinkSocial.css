@@ -1,0 +1,13 @@
+.custom-link a{
+  
+    height: 3rem;
+    text-decoration: none;
+    color: var(--color3);
+}
+
+
+.custom-link:hover a:not(:hover) {
+    opacity: .7;
+    transform: scale(.85);
+    
+}

@@ -1,6 +1,6 @@
 import logo from '../../../assets/logo-swimpower1.webp'
 import { Link } from "react-router-dom"
-import "../NavLogo/NavLogo.css"
+import "./NavLogo.css"
 
 
 const NavLogo = () => {

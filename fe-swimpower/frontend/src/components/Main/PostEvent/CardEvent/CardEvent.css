@@ -1,0 +1,32 @@
+.body-post-event {
+    width: 100vmax;
+    height: 50vb;
+}
+
+.img-post-event {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.body-img-event {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    height: 100%;
+}
+
+.body-post-event {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out;
+}
+
+.body-post-event:hover {
+    transform: scale(1.02);
+   
+}
