@@ -1,0 +1,93 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36" version="24.8.6">
+  <diagram name="Pagina-1" id="JOIgIn3KbeQ9x2CKIV-x">
+    <mxGraphModel dx="1434" dy="785" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-2" value="User model" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="70" width="200" height="390" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-3" value="name: type string, required true&lt;div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-2">
+          <mxGeometry x="10" y="30" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-4" value="surname: type string, required true" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-2">
+          <mxGeometry x="10" y="60" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-5" value="email: type string, required" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-2">
+          <mxGeometry x="10" y="90" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-6" value="role: type enum, default userfree" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-2">
+          <mxGeometry x="10" y="180" width="160" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-7" value="avatar: type string, no required" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-2">
+          <mxGeometry x="10" y="150" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-8" value="dob:type date, value default" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-2">
+          <mxGeometry x="10" y="210" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-10" value="password: type string, required" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-2">
+          <mxGeometry x="20" y="120" width="150" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-11" value="gender: type enum, no required" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-2">
+          <mxGeometry x="10" y="240" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-12" value="post: relation model(only admin)" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-2">
+          <mxGeometry x="10" y="280" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-13" value="ingress : relation model&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-2">
+          <mxGeometry x="10" y="320" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-23" value="Ingress model" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="80" width="200" height="200" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-29" value="User model relation" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-23">
+          <mxGeometry x="10" y="40" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-30" value="date now: type date, required" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-23">
+          <mxGeometry x="10" y="70" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-24" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="1">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="250" y="120" as="sourcePoint" />
+            <mxPoint x="480" y="110" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="300" y="160" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-27" value="1 to mani" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="330" y="80" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-31" value="Post model" style="swimlane;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="480" y="370" width="200" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-32" value="User model relation" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-31">
+          <mxGeometry x="10" y="40" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-33" value="title: type string, required" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-31">
+          <mxGeometry x="10" y="70" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-34" value="img: type string, required" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-31">
+          <mxGeometry x="10" y="100" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-35" value="" style="edgeStyle=segmentEdgeStyle;endArrow=classic;html=1;curved=0;rounded=0;endSize=8;startSize=8;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;" edge="1" parent="KtjzIo8N0zQSq1fHEVoi-31">
+          <mxGeometry width="100" relative="1" as="geometry">
+            <mxPoint x="-230" y="-10" as="sourcePoint" />
+            <mxPoint y="50" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="-230" y="30" />
+              <mxPoint x="-180" y="30" />
+              <mxPoint x="-180" y="50" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-37" value="paragrath: type string, required" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="KtjzIo8N0zQSq1fHEVoi-31">
+          <mxGeometry x="10" y="130" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KtjzIo8N0zQSq1fHEVoi-36" value="1 to mani" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="340" y="390" width="60" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
