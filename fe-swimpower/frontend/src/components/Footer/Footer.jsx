@@ -15,7 +15,7 @@ const Footer = () => {
 
         <Container fluid>
             <Row
-            className='custom-size-footer rounded-3 mt-3 pb-3 shadow rounded-3 bg1 d-flex flex-column justify-content-center g-4 '
+            className='custom-size-footer rounded-3 mt-4 pb-3 shadow rounded-3 bg1 d-flex flex-column justify-content-center g-4 '
             >
                 <LinkSocial /> 
                 <TextFooter/>
