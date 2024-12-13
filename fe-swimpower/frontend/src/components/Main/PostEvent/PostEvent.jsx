@@ -19,10 +19,10 @@ const PostEvent = () => {
 
         <Container>
             <Row
-            className=" py-4 d-flex gap-4"
+            className=" py-4 d-flex gap-4 justify-content-center"
             >
                 <h1
-                className=" bg1 custom-title px-3 rounded-3 d-flex align-items-center "
+                className=" bg1 custom-title rounded-3 d-flex align-items-center  "
                 >
                     I NOSTRI EVENTI
                 </h1>
