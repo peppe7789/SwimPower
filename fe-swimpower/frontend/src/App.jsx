@@ -1,21 +1,33 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
+import 'animate.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/Homepage';
 
+import HomePage from './pages/Homepage';
+import Register from './pages/Register';
+import NotFoundPage from './pages/NotFoundPage';
+import User from './pages/User';
+import Login from './pages/Login';
+import InfoUser from './pages/InfoUser'
 
 const App = () => {
 
 
   return (
-    
-      <BrowserRouter>
-        <Routes>
-          <Route exact path='/' element={<HomePage />} />
 
-        </Routes>
-      </BrowserRouter>
-    
+    <BrowserRouter>
+      <Routes>
+        <Route exact path='/' element={<HomePage />} />
+        <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
+
+        <Route path='/user' element={<User />} />
+        <Route path='/infoUser/:userId' element={<InfoUser />} />
+
+        <Route path='*' element={<NotFoundPage />} />
+      </Routes>
+    </BrowserRouter>
+
 
   )
 }

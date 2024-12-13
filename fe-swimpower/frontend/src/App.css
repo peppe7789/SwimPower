@@ -1,5 +1,6 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Michroma&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
 :root{
     --color1:#78B3CE;
     --color2:#C9E6F0;
@@ -39,3 +40,58 @@ body{
     color: var(--color4);
     cursor: pointer;
 }
+.swal-button{
+    background-color: var(--color1);
+}
+.custom-main{
+    min-height:calc(100vh - 24px) ;
+    margin-top: 100px;
+    
+}
+
+/* style paginazione */
+
+.pagination {
+    justify-content: center;
+    display: flex;
+    padding-left: 0;
+    list-style: none;
+    
+  }
+  
+  .page-item .page-link {
+    position: relative;
+    display: block;
+    margin: 0 2px;
+    min-height: 40px;
+    min-width: 40px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 40px;
+    color: var(--color1);
+    text-decoration: none;
+    
+  }
+  
+  .page-item a.page-link:hover {
+    background-color: var(--color1);
+    color: #ffffff;
+    
+  }
+  
+  .page-item.active .page-link {
+    font-weight: 700;
+    color: #ffffff;
+    background-color: var(--color1);
+    border: var(--color1);
+    
+  }
+  
+  .page-item.disabled .page-link {
+    color: var(--color1);
+    pointer-events: none;
+    cursor: auto;
+    background-color:white;
+  }
+
+  
