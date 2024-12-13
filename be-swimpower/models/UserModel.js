@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-        minLenght: 8
+        minLength: 8
     },
     role: {
         type: String,
@@ -46,8 +46,8 @@ const UserSchema = new mongoose.Schema({
     },
     dob: {
         type: Date,
-        required: true,
-        default: Date.now
+        required: false,
+        default: undefined
     },
     startSubscription: {
         type: Date,
