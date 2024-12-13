@@ -1,16 +1,22 @@
 import { useState } from 'react';
 import { Offcanvas } from 'react-bootstrap';
 import { AlignJustify } from 'lucide-react';
-import { House } from "lucide-react"
-import { Link } from "react-router-dom"
+import { House, UsersRound,CalendarArrowUp } from "lucide-react"
+import { Link, useParams } from "react-router-dom"
 import "./NavMenu.css"
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from "react-redux";
+import { authenticatedUser, logoutUser } from '../../../reducer/UsersSlice';
+
+
 
 const NavMenu = () => {
-    
+    const dispatch = useDispatch()
+    const user = useSelector(authenticatedUser)
     const [show, setShow] = useState(false);
-
     const handleClose = () => setShow(false);
     const toggleShow = () => setShow((s) => !s);
+    const role = useSelector((state) => state.users.authenticatedUser?.role);
 
 
     return (
@@ -26,26 +32,30 @@ const NavMenu = () => {
                     </Offcanvas.Title>
                 </Offcanvas.Header>
                 <Offcanvas.Body
-                className=' d-flex flex-column gap-2'
+                    className=' d-flex flex-column gap-2'
                 >
                     <Link to="/"
-                        className='text-hover d-flex gap-2 text-reset '
+                        className=' d-flex gap-2 text-hover text-reset '
                     >
-                        <House />       
+                        <House />
                         <span>Home</span>
                     </Link>
                     <Link to="/"
                         className='text-hover d-flex gap-2 text-reset '
                     >
-                        <House />
+                        <CalendarArrowUp />
                         <span>Prenota lezione personal</span>
                     </Link>
-                    <Link to="/"
-                        className='text-hover d-flex gap-2 text-reset '
-                    >
-                        <House />
-                        <span>Contatti</span>
-                    </Link>
+                    {role === "admin"
+                        ? <Link to="/user"
+                            className='text-hover d-flex gap-2 text-reset '
+                        >
+                            <UsersRound />
+                            <span>Lista Utenti </span>
+                        </Link>
+                        : ""
+                    }
+
                 </Offcanvas.Body>
             </Offcanvas>
         </>
