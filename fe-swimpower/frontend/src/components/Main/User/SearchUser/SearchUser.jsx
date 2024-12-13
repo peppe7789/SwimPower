@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { LuUserRoundSearch } from "react-icons/lu";
-import './SearchUser.css'
 import AllertError from "../../../Allert/AllertError/AllertError";
 
 

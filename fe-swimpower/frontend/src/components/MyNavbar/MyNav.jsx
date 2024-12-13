@@ -3,13 +3,16 @@ import { Col, Container, Row } from "react-bootstrap";
 import NavLogo from "../MyNavbar/NavLogo/NavLogo"
 import NavMenu from './NavMenu/NavMenu';
 import NavAvatar from './NavAvatar/NavAvatar';
+import "./MyNav.css"
 
 
 const MyNav = () => {
 
 
     return (
-        <nav>
+        <nav
+        className='custokm-position-nav'
+        >
             <Container fluid >
                 <Row
                     className=' shadow rounded-3'
