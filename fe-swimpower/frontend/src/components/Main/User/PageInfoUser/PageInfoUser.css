@@ -1,0 +1,22 @@
+.body-info-user {
+    width: 100vmax;
+}
+
+.img-info-user {
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.body-img-user {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.size-inpt-file{
+    width: 20rem;
+}
+
+
+
