@@ -3,13 +3,21 @@ import CardEvent from "./CardEvent/CardEvent"
 import { useDispatch, useSelector } from "react-redux";
 import { allPostEvents, getPostEvents } from "../../../reducer/PostEventSlice";
 import { useEffect } from "react";
+
 import './PostEvent.css'
+import ButtonCreatePost from "../ButtonCreatePost/ButtonCreatePost";
+import { authenticatedUser } from "../../../reducer/UsersSlice";
 
 
-const PostEvent = () => {
+const PostEvent = ({ setOpenModalCreateForm, openModalCreateForm }) => {
 
     const dispatch = useDispatch()
     const postEvents = useSelector(allPostEvents)
+    const user = useSelector(authenticatedUser)
+
+    const handleModalCreateForm = () => {
+        setOpenModalCreateForm((prevState) => !prevState);
+    };
 
     useEffect(() => {
         dispatch(getPostEvents())
@@ -19,13 +27,19 @@ const PostEvent = () => {
 
         <Container>
             <Row
-            className=" py-4 d-flex gap-4 justify-content-center"
+                className=" py-4 d-flex gap-4 justify-content-center"
             >
                 <h1
-                className=" bg1 custom-title rounded-3 d-flex align-items-center  "
+                    className=" bg1 custom-title rounded-3 d-flex align-items-center justify-content-around  "
                 >
                     I NOSTRI EVENTI
+                    {
+                        user?.role === "admin" &&
+                        <ButtonCreatePost
+                        onClick={handleModalCreateForm}
+                        />}
                 </h1>
+
                 {Array.isArray(postEvents) &&
                     postEvents.map((post) => (
                         <CardEvent
@@ -34,6 +48,7 @@ const PostEvent = () => {
                             subtitle={post.subtitle}
                             paragraph={post.paragraph}
                             img={post.img}
+
                         />
                     ))
                 }

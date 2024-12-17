@@ -1,0 +1,17 @@
+.body-form-post {
+    width: 100vmax;
+}
+
+.body-img-form-post {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.size-inpt-file{
+    width: 20rem;
+}
+
+
+
