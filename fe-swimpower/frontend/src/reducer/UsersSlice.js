@@ -1,10 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AllertError from "../components/Allert/AllertError/AllertError";
 import jwt_decode from 'jwt-decode';
-
-
-
-
+import AllertNoUser from "../components/Allert/AllertNoUser/AllertNoUser";
 
 
 const initialState = {
@@ -58,7 +55,7 @@ export const loginUser = createAsyncThunk(
             })
 
             if (!response.ok) {
-                AllertError()
+                AllertNoUser()
             }
             const data = await response.json()
             return data

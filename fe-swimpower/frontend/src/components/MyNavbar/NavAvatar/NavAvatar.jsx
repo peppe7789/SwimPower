@@ -9,14 +9,19 @@ import { authenticatedUser, logoutUser } from '../../../reducer/UsersSlice';
 
 
 
+
 const NavAvatar = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const user = useSelector(authenticatedUser)
-  console.log("Authenticated user:", user)
+
 
   const handleRedirectRegisterForm = () => navigate("/login")
-  const handleUserPage= ()=> navigate('/user')
+  const handleUserPage = () => {
+    if (user.role === "admin") {
+      navigate('/user')
+    }
+  }
   const handleLogout = () => {
     dispatch(logoutUser());
     navigate("/");
@@ -52,17 +57,33 @@ const NavAvatar = () => {
               </Dropdown.Toggle>
 
               <Dropdown.Menu>
-              <Dropdown.Item
-                className='text-hover'
-                onClick={handleUserPage}
-              >
-                Profilo
-              </Dropdown.Item>
-              <Dropdown.Item
-                onClick={handleLogout}
-              >
-                Logout
-              </Dropdown.Item>
+
+                {
+                  user?.role === "admin" &&
+                  (<Dropdown.Item
+                    className='text-hover'
+                    onClick={handleUserPage}
+                  >
+                    DashBoard
+                  </Dropdown.Item>)
+                }
+
+                {
+                  user?.role !== "admin" &&
+                    (
+                      <Dropdown.Item
+                        className='text-hover'
+                        onClick={handleUserPage}
+                      >
+                        Profilo
+                      </Dropdown.Item>
+                    )
+                }
+                <Dropdown.Item
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </>
