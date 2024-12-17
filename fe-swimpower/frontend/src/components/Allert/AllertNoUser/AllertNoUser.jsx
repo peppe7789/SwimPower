@@ -1,12 +1,12 @@
 import Swal from "sweetalert2";
 
 
-const AllertError = (error) => {
+const AllertNoUser = (error) => {
 
     Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Qualcosa è andato storto!",
+        icon: "warning",
+        title: "Mi dispiace",
+        text: "Utente non riconosciuto",
         confirmButtonText: "OK",
         customClass: {
             confirmButton: "swal-button",
@@ -16,4 +16,4 @@ const AllertError = (error) => {
 
 }
 
-export default AllertError
+export default AllertNoUser

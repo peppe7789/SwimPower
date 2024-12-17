@@ -1,11 +1,11 @@
+
 import Swal from "sweetalert2";
 
-const AllertSuccess = () => {
-
+const AllertSuccessModify = () => {
 
     Swal.fire({
-        title: "Benvenuto in SWIMPOWER",
-        text: "effettua il login",
+        icon:"success",
+        title: "Modifica effettuata con successo",
         confirmButtonText: "OK",
         customClass: {
             confirmButton: "swal-button",
@@ -27,6 +27,6 @@ const AllertSuccess = () => {
     })
 
 
-}
+};
 
-export default AllertSuccess
+export default AllertSuccessModify
