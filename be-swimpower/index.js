@@ -25,13 +25,10 @@ const server = express()
 
 server.use(express.json())
 
-const corsLinkFrontEnd = {
-    origin: process.env.FRONTEND_URL,
-    methods: "GET,PUT,POST,PATCH,DELETE",
-}
+
 
 // utilizzo middleware
-server.use(cors(corsLinkFrontEnd))
+server.use(cors())
 
 
 
