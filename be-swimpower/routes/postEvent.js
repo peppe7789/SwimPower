@@ -2,7 +2,7 @@ const express = require("express")
 const postEvent = express.Router()
 const multer = require("multer")
 const cloudStorage = require("../middleware/updateUserImageCloudinaryMiddleware")
-const cloud = multer({ storage: cloudStorage })
+const cloud = require("../middleware/updateUserImageCloudinaryMiddleware")
 
 
 const PostEventModel = require("../models/PostEventModel")
@@ -17,8 +17,15 @@ postEvent.post("/postEvent/create", [ValidatePostEvent], async (req, res, next) 
 
     const user = await UserModel
         .findOne({ _id: req.body.user })
-
-    const role = user.role
+    console.log(req.body.user);
+    if (!user) {
+        return res
+            .status(404)
+            .send({
+                statusCode: 404,
+                message: "User not found",
+            });
+    }
 
     const newPostEvent = new PostEventModel({
         user: user._id,
@@ -36,14 +43,7 @@ postEvent.post("/postEvent/create", [ValidatePostEvent], async (req, res, next) 
                 { $push: { postEvent: savedPostEvent } }
             )
 
-        if (role !== "admin") {
-            return res
-                .status(400)
-                .send({
-                    statusCode: 400,
-                    message: "Request not possible for Role Admin"
-                })
-        }
+
         res
             .status(201)
             .send({
@@ -56,8 +56,21 @@ postEvent.post("/postEvent/create", [ValidatePostEvent], async (req, res, next) 
     }
 })
 
+postEvent.post("/postEvent/uploads/cloud", cloud.single("img"), async (req, res, next) => {
+    try {
+        res
+            .status(200)
+            .json({
+                img: req.file.path
+            })
+
+    } catch (e) {
+        next(e)
+    }
+})
+
 postEvent.get("/postEvent", async (req, res, next) => {
-    const limit= parseInt(req.query.limit) || ""
+    const limit = parseInt(req.query.limit) || ""
     try {
         const postEvent = await PostEventModel
             .find()
@@ -121,6 +134,7 @@ postEvent.delete("/postEvent/delete/:postEventId", async (req, res, next) => {
 
 postEvent.patch("/postEvent/uploadImg/:postEventId/img", cloud.single("img"), async (req, res, next) => {
     const { postEventId } = req.params
+
     const postEvent = await PostEventModel
         .findById(postEventId)
 
@@ -134,6 +148,7 @@ postEvent.patch("/postEvent/uploadImg/:postEventId/img", cloud.single("img"), as
     }
     try {
         const updatePostEventData = { img: req.file.path }
+        console.log(updatePostEventData);
         const options = { new: true }
 
         const result = await PostEventModel
