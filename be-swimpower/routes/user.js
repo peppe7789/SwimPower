@@ -3,7 +3,7 @@ const user = express.Router()
 const UserModel = require("../models/UserModel")
 const multer = require("multer")
 const cloudStorage = require("../middleware/updateUserImageCloudinaryMiddleware")
-const cloud = multer({ storage: cloudStorage })
+const cloud = require('../middleware/updateUserImageCloudinaryMiddleware')
 const bcrypt = require("bcrypt")
 const jwt = require('jsonwebtoken')
 const ValidateUserBody = require('../middleware/validateUserBody')
@@ -19,6 +19,8 @@ user.get("/user", async (req, res, next) => {
             .limit(pageSize)
             .skip((page - 1) * pageSize)
             .populate(['checkIn', 'ticketService'])
+            .sort({ createdAt: -1 })  
+
 
         const count = await UserModel.countDocuments()
         const totalPages = Math.ceil(count / pageSize)
@@ -131,6 +133,20 @@ user.delete("/user/delete/:userId", async (req, res, next) => {
     }
 })
 
+user.post("/user/uploads/cloud", cloud.single("avatar"), async (req, res, next) => {
+    console.log(process.env.CLOUDINARY_APY_KEY, process.env.CLOUDINARY_API_SECRET, process.env.CLOUDINARY_API_CLOUDNAME);
+    try {
+        res
+            .status(200)
+            .json({
+                avatar: req.file.path
+            })
+
+
+    } catch (e) {
+        next(e)
+    }
+})
 
 user.patch("/userpatch/:userId/avatar", cloud.single("avatar"), async (req, res, next) => {
 
@@ -138,18 +154,18 @@ user.patch("/userpatch/:userId/avatar", cloud.single("avatar"), async (req, res,
 
     const user = await UserModel
         .findById(userId)
-    
-        if (!user) {
-            return res
-                .status(404)
-                .send({
-                    statusCode: 404,
-                    message: "User not found"
-                })
-        }
+
+    if (!user) {
+        return res
+            .status(404)
+            .send({
+                statusCode: 404,
+                message: "User not found"
+            })
+    }
     try {
-        const updateUserData = { avatar: req.file.path};
-         const options = { new: true }
+        const updateUserData = { avatar: req.file.path };
+        const options = { new: true }
 
         const result = await UserModel
             .findByIdAndUpdate(userId, updateUserData, options)
@@ -165,7 +181,7 @@ user.patch("/userpatch/:userId/avatar", cloud.single("avatar"), async (req, res,
     } catch (e) {
         next(e)
     }
-    
+
 })
 
 user.patch("/user/patch/:userId", async (req, res, next) => {
@@ -236,6 +252,7 @@ user.post("/user/login", async (req, res, next) => {
         }
 
         const token = jwt.sign({
+            _id: user._id, 
             email: user.email,
             role: user.role,
             name: user.name,
@@ -260,7 +277,7 @@ user.post("/user/login", async (req, res, next) => {
 
 user.get('/user/bysurname/:surname', async (req, res, next) => {
     const { surname } = req.params;
-    
+
 
     try {
 
@@ -302,7 +319,7 @@ user.get('/user/bysurname/:surname', async (req, res, next) => {
 
 user.get('/user/byrole/:role', async (req, res, next) => {
     const { role } = req.params;
-    
+
 
     try {
 
