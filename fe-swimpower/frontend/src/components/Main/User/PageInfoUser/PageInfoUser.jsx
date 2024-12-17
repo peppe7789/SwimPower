@@ -5,6 +5,8 @@ import { Tooltip } from "flowbite-react";
 import { TbUserEdit } from "react-icons/tb";
 import { useState } from "react";
 import AllertError from "../../../Allert/AllertError/AllertError";
+import AllertSuccessModify from "../../../Allert/AllertSuccessModify/AllertSuccesModify";
+import { useNavigate } from "react-router-dom";
 
 
 const PageInfoUser = ({ infoUser }) => {
@@ -12,6 +14,7 @@ const PageInfoUser = ({ infoUser }) => {
     if (!infoUser || !infoUser.user) {
         return <Loader />
     }
+    const navigate = useNavigate()
 
     const [formData, setFormData] = useState({
         name: infoUser?.user?.name || "",
@@ -23,6 +26,7 @@ const PageInfoUser = ({ infoUser }) => {
         startSubscription: infoUser?.user?.startSubscription?.split("T")[0] || "",
         endSubscription: infoUser?.user?.endSubscription?.split("T")[0] || "",
     });
+   
     const [file, setFile] = useState(null)
 
     const handleInputChange = (e) => {
@@ -41,7 +45,7 @@ const PageInfoUser = ({ infoUser }) => {
             [name]: value
         });
     }
-
+    const handleSuccessModify = () => navigate('/user')
 
 
     const uploadFile = async (file) => {
@@ -56,13 +60,12 @@ const PageInfoUser = ({ infoUser }) => {
                     body: fileData,
                 }
             );
-            console.log(response);
+
             if (!response.ok) {
                 throw new Error(`File upload failed: ${response.status}`);
             }
 
             const result = await response.json();
-            console.log("File uploaded successfully:", result);
             return result;
         } catch (error) {
             AllertError(error)
@@ -97,8 +100,13 @@ const PageInfoUser = ({ infoUser }) => {
             if (!response.ok) {
                 throw new Error(`Failed to update user: ${response.status}`);
             }
-
+            
+            
             const updatedUser = await response.json();
+            
+            AllertSuccessModify()
+            handleSuccessModify()
+
 
         } catch (error) {
             AllertError(error);
@@ -109,7 +117,7 @@ const PageInfoUser = ({ infoUser }) => {
         return Loader;
     }
 
-    const { name, surname, email, role, avatar, gender, dob, startSubscription, endSubscription, _id } = infoUser.user;
+    const { name, surname, email, role, avatar, gender, dob, startSubscription, endSubscription } = infoUser.user;
 
     return (
         <>
@@ -165,9 +173,14 @@ const PageInfoUser = ({ infoUser }) => {
                                 <Form.Control className=" size-inpt-file" id="cognome" defaultValue={surname} name='surname' type="text" onChange={handleInputChange} />
                             </Form.Group>
 
-                            <Form.Group>
+                            <Form.Group  >
                                 <Form.Label>Ruolo</Form.Label>
-                                <Form.Control className=" size-inpt-file" id="role" defaultValue={role} name='role' type="text" onChange={handleInputChange} />
+                                <Form.Select name='role' defaultValue={role} onChange={handleInputChange}>
+                                    <option value="admin">admin</option>
+                                    <option value="instructor">instructor</option>
+                                    <option value="payuser">payuser</option>
+                                    <option value="freeuser">freeuser</option>
+                                </Form.Select>
                             </Form.Group>
 
                             <Form.Group>
@@ -183,8 +196,7 @@ const PageInfoUser = ({ infoUser }) => {
                         >
                             <Form.Group  >
                                 <Form.Label>Genere</Form.Label>
-                                <Form.Select name='gender' onChange={handleInputChange}>
-                                    <option>{gender}</option>
+                                <Form.Select name='gender' defaultValue={gender} onChange={handleInputChange}>
                                     <option value="M">M</option>
                                     <option value="F">F</option>
                                     <option value="not specified">not specified</option>
@@ -193,7 +205,7 @@ const PageInfoUser = ({ infoUser }) => {
 
                             <Form.Group>
                                 <Form.Label>Data di nascita</Form.Label>
-                                <Form.Control className=" size-inpt-file" id="dob" defaultValue={dob} name='dob' placeholder={dob} type="date" onChange={handleDateChange} />
+                                <Form.Control className=" size-inpt-file" id="dob" deValue={dob} name='dob' placeholder={dob} type="date" onChange={handleDateChange} />
                             </Form.Group>
 
                             <Form.Group>
