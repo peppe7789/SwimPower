@@ -88,7 +88,7 @@ const CardEvent = ({ title, subtitle, paragraph, img, post, handleDeletePost }) 
                                 className="body-card-event p-3 d-flex flex-column gap-3  "
                             >
                                 <h3
-                                    className=" text-truncate"
+                                    
                                 >
                                     {title}
                                 </h3>
