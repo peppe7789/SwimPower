@@ -7,8 +7,8 @@ const CarouselSinglePost = ({ img }) => {
       {img
         ? <img src={img} alt="imagine" style={{
           width: "100%", 
-          height: "400px", 
-          objectFit: "cover", 
+          height: "500px", 
+          objectFit: "contain", 
           borderRadius: "10px",
         }}/>
         : <div>No Image Available</div>}

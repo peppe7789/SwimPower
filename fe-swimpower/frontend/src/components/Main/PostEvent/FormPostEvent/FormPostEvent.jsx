@@ -1,42 +1,53 @@
+import { useState, useEffect } from "react";
 import { Button, FileInput, Label, Modal, TextInput, Textarea } from "flowbite-react";
-import './FormPostEvent.css'
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import AllertSuccessCreate from "../../../Allert/AllertSuccessCreate/AllertSuccessCreate"
+import AllertSuccessCreate from "../../../Allert/AllertSuccessCreate/AllertSuccessCreate";
 import AllertError from "../../../Allert/AllertError/AllertError";
 import { authenticatedUser } from "../../../../reducer/UsersSlice";
-import { allPostEvents } from "../../../../reducer/PostEventSlice";
+import { allPostEvents, getPostEvents } from "../../../../reducer/PostEventSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+const FormPostEvent = ({ openModalCreateForm, setOpenModalCreateForm, postToUpdate }) => {
+    const user = useSelector(authenticatedUser);
+    const dispatch = useDispatch();
+    const [formDataPost, setFormDataPost] = useState({});
+    const [fileImg, setFileImg] = useState({});
 
 
+    useEffect(() => {
+        if (postToUpdate) {
+            setFormDataPost({
+                title: postToUpdate.title,
+                subtitle: postToUpdate.subtitle,
+                paragraph: postToUpdate.paragraph,
+            });
+            setFileImg(postToUpdate.img);
+        }
+    }, [postToUpdate]);
 
-const FormPostEvent = ({openModalCreateForm, setOpenModalCreateForm}) => {
 
-    const user = useSelector(authenticatedUser)
-    const postEvents = useSelector(allPostEvents)
-    const [formDataPost, setFormDataPost] = useState({})
-    const [formData, setFormData] = useState({
-      
-    })
-    const [fileImg, setFileImg] = useState({})
-    
-    
-    
+    const handleCloseForm = () => {
+        setOpenModalCreateForm(false);
+        dispatch(getPostEvents());
+    };
+
 
     const onChangeFile = (e) => {
-        setFileImg(e.target.files[0])
-    }
+        setFileImg(e.target.files[0]);
+    };
+
 
     const onChangeInput = (e) => {
-        const { name, value } = e.target
+        const { name, value } = e.target;
         setFormDataPost({
             ...formDataPost,
-            [name]: value
-        })
-    }
+            [name]: value.toLowerCase(),
+        });
+    };
+
 
     const uploadFile = async (file) => {
         const fileData = new FormData();
-        fileImg.append("img", file);
+        fileData.append("img", file);
 
         try {
             const response = await fetch(
@@ -52,67 +63,72 @@ const FormPostEvent = ({openModalCreateForm, setOpenModalCreateForm}) => {
             }
 
             const result = await response.json();
-
             return result;
         } catch (error) {
-            AllertError(error)
+            AllertError(error);
         }
     };
 
-    const submitPostEvent = async (e) => {
-        e.preventDefault()
-        const userRole = user.role
 
+    const submitPostEvent = async (e) => {
+        e.preventDefault();
 
         if (fileImg) {
             try {
-                const uploadedFile = await uploadFile(file)
+                const uploadedFile = await uploadFile(fileImg);
                 const postEventFormData = {
                     ...formDataPost,
-                    userRole,
-                    img: uploadedFile.img
-                }
-                console.log(postEventFormData);
+                    img: uploadedFile.img,
+                    user: user._id,
+                };
 
                 const response = await fetch(`${import.meta.env.VITE_SWIMPOWER_SERVER_BASE_URL}/postEvent/create`, {
                     method: 'POST',
-                    body: JSON.stringify(postEventFormData)
-                })
-                AllertSuccessCreate()
-                return await response.json()
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(postEventFormData),
+                });
 
+                if (response.ok) {
+                    AllertSuccessCreate();
+                } else {
+                    AllertError(error);
+                }
+
+                handleCloseForm();
+                return await response.json();
             } catch (error) {
-                AllertError(error)
+                AllertError(error);
             }
         }
+    };
 
-    }
 
-  
 
     return (
-
         <>
-
-            <Modal className=" mt-5" show={openModalCreateForm} size="md" onClose={() => setOpenModalCreateForm(false)} popup>
+            <Modal className="mt-5" show={openModalCreateForm} size="md" onClose={() => setOpenModalCreateForm(false)} popup>
                 <Modal.Header />
                 <Modal.Body>
                     <div className="space-y-6 d-flex flex-column gap-2">
-                        <h3 className="text-xl font-medium text-gray-900 dark:text-white">Crea post eventi</h3>
-                        
+                        <h3 className="text-xl font-medium text-gray-900 dark:text-white">
+                            Crea post
+                        </h3>
                         <div>
                             <div className="mb-2 block">
-                                <Label htmlFor="img" value="Imagine post" />
+                                <Label htmlFor="img" value="Immagine post" />
                             </div>
                             <FileInput
                                 id="img"
-                                placeholder="Inserisci imagine post"
+                                placeholder="Inserisci immagine post"
                                 name="img"
-                                value={formDataPost.img}
                                 onChange={onChangeFile}
                                 required
+                                defaultValue={postToUpdate?.img}
                             />
                         </div>
+
                         
                         <div>
                             <div className="mb-2 block">
@@ -122,13 +138,13 @@ const FormPostEvent = ({openModalCreateForm, setOpenModalCreateForm}) => {
                                 id="title"
                                 placeholder="Inserisci titolo post"
                                 name="title"
-                                value={formDataPost.title}
                                 onChange={onChangeInput}
+                                value={formDataPost.title || ''} 
                                 required
-                                
                             />
                         </div>
 
+                        
                         <div>
                             <div className="mb-2 block">
                                 <Label htmlFor="subtitle" value="Sottotitolo" />
@@ -137,12 +153,13 @@ const FormPostEvent = ({openModalCreateForm, setOpenModalCreateForm}) => {
                                 id="subtitle"
                                 placeholder="Inserisci sottotitolo"
                                 name="subtitle"
-                                value={formDataPost.subtitle}
                                 onChange={onChangeInput}
+                                value={formDataPost.subtitle || ''} 
                                 required
                             />
                         </div>
 
+                       
                         <div>
                             <div className="mb-2 block">
                                 <Label htmlFor="paragraph" value="Descrizione" />
@@ -151,26 +168,26 @@ const FormPostEvent = ({openModalCreateForm, setOpenModalCreateForm}) => {
                                 id="paragraph"
                                 placeholder="Inserisci descrizione post"
                                 name="paragraph"
-                                value={formDataPost.paragraph}
                                 onChange={onChangeInput}
+                                value={formDataPost.paragraph || ''} 
                                 required
                             />
                         </div>
 
+                    
                         <div className="w-full">
                             <Button
                                 onClick={submitPostEvent}
                                 className="bg1"
                             >
-                                Crea post
+                            Crea post
                             </Button>
                         </div>
                     </div>
                 </Modal.Body>
             </Modal>
         </>
+    );
+};
 
-    )
-}
-
-export default FormPostEvent
+export default FormPostEvent;

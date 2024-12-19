@@ -4,15 +4,20 @@ import ButtonModifyPost from "../../ButtonModifyPost/ButtonModifyPost"
 import { useDispatch, useSelector } from "react-redux";
 import { authenticatedUser } from "../../../../reducer/UsersSlice";
 import ButtonDeletePost from "../../ButtonDeletePost/ButtonDeletePost";
+import { useState } from "react";
+import FormUploadPostEvent from "../FormUploadPostEvent/FormUploadPostEvent";
 
 
-const CardEvent = ({ title, subtitle, paragraph, img, setOpenModal, openModal }) => {
 
+
+const CardEvent = ({ title, subtitle, paragraph, img, post, handleDeletePost }) => {
 
     const dispatch = useDispatch()
     const user = useSelector(authenticatedUser)
+    const [openModal, setOpenModal] = useState(false)
     
-   
+    const handleModifyPost = () => setOpenModal(true)
+
 
     return (
         <>
@@ -25,14 +30,18 @@ const CardEvent = ({ title, subtitle, paragraph, img, setOpenModal, openModal })
                         className=" d-flex  justify-content-center m-0   "
                     >
                         <div
-                            className=" d-flex gap-4 bg3 body-post-event rounded-3 flex-column flex-md-row"
+                            className=" d-flex gap-4 bg3 body-post-event rounded-3 flex-column flex-md-row p-3"
                         >
                             <Col
                                 sm
                                 md={4}
                                 className="body-img-event"
                             >
-                                <img src={img} alt="Image event" className=" p-3 img-post-event rounded-5" />
+                                <div
+                                    className="img-post-event"
+                                >
+                                    <img src={img} alt="Image event" className=" h-100 w-100 p-3 " />
+                                </div>
                             </Col>
                             <Col
                                 sm
@@ -68,15 +77,15 @@ const CardEvent = ({ title, subtitle, paragraph, img, setOpenModal, openModal })
                         >
                             <Col
                                 sm
-                                md={4}
+                                md={6}
                                 className="body-img-event"
                             >
-                                <img src={img} alt="Image event" className=" img-post-event rounded-5" />
+                                <img src={img} alt="Image event" className="h-100 w-100 p-3 rounded-5  " />
                             </Col>
                             <Col
                                 sm
-                                md={6}
-                                className="body-card-event p-3"
+                                md={4}
+                                className="body-card-event p-3 d-flex flex-column gap-3  "
                             >
                                 <h3
                                     className=" text-truncate"
@@ -90,21 +99,32 @@ const CardEvent = ({ title, subtitle, paragraph, img, setOpenModal, openModal })
                                     {paragraph}
                                 </p>
                             </Col>
-                            
+
                             <Col
-                                sm
+                                sm={12}
                                 md={1}
-                                className=" d-flex justify-content-center align-items-center gap-3 flex-md-column  bg1 align "
+                                className=" d-flex justify-content-center align-items-center gap-3 flex-md-column p-3 p-md-5 bg1 align "
                             >
                                 <ButtonModifyPost
-                                    // onClick={handleModalPost}
+                                    onClick={handleModifyPost}
                                 />
-                                <ButtonDeletePost />
+                                <ButtonDeletePost
+                                    onClick={() => handleDeletePost(post._id)}
+                                />
                             </Col>
                         </div>
                     </Col>
                 )
             }
+            {
+                openModal && (
+                    <FormUploadPostEvent
+                        postToUpdate={post}
+                        openModal={openModal}
+                        setOpenModal={setOpenModal}
+                    />
+                )
+}
         </>
 
     )

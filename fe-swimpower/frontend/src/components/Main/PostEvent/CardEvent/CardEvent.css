@@ -1,13 +1,14 @@
 .body-post-event {
     width: 100vmax;
-    height: 50vb;
+    /* max-height: 50vb; */
 }
 
 .img-post-event {
-    width: 100%;
-    height: 400px;
+    min-width: 20rem;
+    height: 350px;
     object-fit: cover;
     border-radius: 10px;
+    
 }
 
 .body-img-event {
@@ -28,5 +29,9 @@
 
 .body-post-event:hover {
     transform: scale(1.02);
+   
+}
+.body-card-event{
+    max-height: 20rem;
    
 }
