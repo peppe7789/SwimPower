@@ -1,7 +1,7 @@
 import { Container, Row } from "react-bootstrap"
 import CardEvent from "./CardEvent/CardEvent"
 import { useDispatch, useSelector } from "react-redux";
-import { allPostEvents, getPostEvents } from "../../../reducer/PostEventSlice";
+import { allPostEvents, deletePostEvents, getPostEvents } from "../../../reducer/PostEventSlice";
 import { useEffect } from "react";
 
 import './PostEvent.css'
@@ -9,11 +9,15 @@ import ButtonCreatePost from "../ButtonCreatePost/ButtonCreatePost";
 import { authenticatedUser } from "../../../reducer/UsersSlice";
 
 
-const PostEvent = ({ setOpenModalCreateForm, openModalCreateForm }) => {
+const PostEvent = ({ setOpenModalCreateForm }) => {
 
     const dispatch = useDispatch()
     const postEvents = useSelector(allPostEvents)
     const user = useSelector(authenticatedUser)
+
+    const handleDeletePost = (postId) => {
+        dispatch(deletePostEvents(postId));
+    }
 
     const handleModalCreateForm = () => {
         setOpenModalCreateForm((prevState) => !prevState);
@@ -22,6 +26,8 @@ const PostEvent = ({ setOpenModalCreateForm, openModalCreateForm }) => {
     useEffect(() => {
         dispatch(getPostEvents())
     }, [dispatch])
+
+
 
     return (
 
@@ -36,7 +42,7 @@ const PostEvent = ({ setOpenModalCreateForm, openModalCreateForm }) => {
                     {
                         user?.role === "admin" &&
                         <ButtonCreatePost
-                        onClick={handleModalCreateForm}
+                            onClick={handleModalCreateForm}
                         />}
                 </h1>
 
@@ -48,7 +54,8 @@ const PostEvent = ({ setOpenModalCreateForm, openModalCreateForm }) => {
                             subtitle={post.subtitle}
                             paragraph={post.paragraph}
                             img={post.img}
-
+                            post={post}
+                            handleDeletePost={handleDeletePost}
                         />
                     ))
                 }

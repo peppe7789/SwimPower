@@ -7,7 +7,7 @@ const ButtonModifyPost = ({onClick}) => {
     return (
         <Tooltip content="Modifica post">
         <button
-            className="bg-white rounded-2 p-1 text-hover text-reset"
+            className="bg-white rounded-2 p-2 text-hover text-reset"
         onClick={onClick}
         >
                 <CiEdit

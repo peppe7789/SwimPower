@@ -56,9 +56,6 @@ const User = () => {
     };
 
 
-
-
-
     useEffect(() => {
         getAllPayUser()
     }, [page, pageSize])
