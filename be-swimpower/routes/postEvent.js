@@ -17,7 +17,7 @@ postEvent.post("/postEvent/create", [ValidatePostEvent], async (req, res, next) 
 
     const user = await UserModel
         .findOne({ _id: req.body.user })
-    console.log(req.body.user);
+   
     if (!user) {
         return res
             .status(404)
@@ -114,18 +114,17 @@ postEvent.delete("/postEvent/delete/:postEventId", async (req, res, next) => {
     }
 
     try {
-        const deletePostEvent = req.body
-        const options = { new: true }
+        await PostEventModel.findByIdAndDelete(postEventId)
 
-        const result = await PostEventModel
-            .findByIdAndDelete(postEventId, deletePostEvent, options)
+        // const allPostEvent = await PostEventModel
+        //     .find()
 
         res
             .status(200)
             .send({
                 statusCode: 200,
                 message: "Post deleted with successfully",
-                result
+                
             })
     } catch (e) {
         next(e)
