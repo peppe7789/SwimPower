@@ -31,7 +31,10 @@
     transform: scale(1.02);
    
 }
-.body-card-event{
-    max-height: 20rem;
-   
-}
+h3 {
+    
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+  }
+  
