@@ -120,7 +120,8 @@ user.delete("/user/delete/:userId", async (req, res, next) => {
         await UserModel.findByIdAndDelete(userId)
 
 
-        const allUsers = await UserModel.find()
+        const allUsers = await UserModel
+            .find()
 
 
         res.status(200).send({
@@ -134,7 +135,7 @@ user.delete("/user/delete/:userId", async (req, res, next) => {
 })
 
 user.post("/user/uploads/cloud", cloud.single("avatar"), async (req, res, next) => {
-    console.log(process.env.CLOUDINARY_APY_KEY, process.env.CLOUDINARY_API_SECRET, process.env.CLOUDINARY_API_CLOUDNAME);
+    
     try {
         res
             .status(200)
